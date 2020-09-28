@@ -1,0 +1,15 @@
+/mnt/wsl/Afalunchwebscrape/bin/Debug/netcoreapp3.1/Afalunchwebscrape
+/mnt/wsl/Afalunchwebscrape/bin/Debug/netcoreapp3.1/Afalunchwebscrape.deps.json
+/mnt/wsl/Afalunchwebscrape/bin/Debug/netcoreapp3.1/Afalunchwebscrape.runtimeconfig.json
+/mnt/wsl/Afalunchwebscrape/bin/Debug/netcoreapp3.1/Afalunchwebscrape.runtimeconfig.dev.json
+/mnt/wsl/Afalunchwebscrape/bin/Debug/netcoreapp3.1/Afalunchwebscrape.dll
+/mnt/wsl/Afalunchwebscrape/bin/Debug/netcoreapp3.1/Afalunchwebscrape.pdb
+/mnt/wsl/Afalunchwebscrape/obj/Debug/netcoreapp3.1/Afalunchwebscrape.csprojAssemblyReference.cache
+/mnt/wsl/Afalunchwebscrape/obj/Debug/netcoreapp3.1/Afalunchwebscrape.AssemblyInfoInputs.cache
+/mnt/wsl/Afalunchwebscrape/obj/Debug/netcoreapp3.1/Afalunchwebscrape.AssemblyInfo.cs
+/mnt/wsl/Afalunchwebscrape/obj/Debug/netcoreapp3.1/Afalunchwebscrape.csproj.CoreCompileInputs.cache
+/mnt/wsl/Afalunchwebscrape/obj/Debug/netcoreapp3.1/Afalunchwebscrape.dll
+/mnt/wsl/Afalunchwebscrape/obj/Debug/netcoreapp3.1/Afalunchwebscrape.pdb
+/mnt/wsl/Afalunchwebscrape/obj/Debug/netcoreapp3.1/Afalunchwebscrape.genruntimeconfig.cache
+/mnt/wsl/Afalunchwebscrape/bin/Debug/netcoreapp3.1/AngleSharp.dll
+/mnt/wsl/Afalunchwebscrape/obj/Debug/netcoreapp3.1/Afalunchwebscrape.csproj.CopyComplete
