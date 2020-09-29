@@ -5,7 +5,7 @@ namespace maträtter {
         public int Pris { get; set; }
 
         public decimal CalcaulateDiscountedPrice(){
-            
+             
         }
 
     }
