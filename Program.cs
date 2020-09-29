@@ -10,12 +10,11 @@ using Diwine.Scrapers;
 
 namespace Afalunchwebscrape {
     class Program {
-        static Task Main (string[] args) {
+        static async Task Main (string[] args) {
             DiwineScrape diwine = new DiwineScrape();
-            diwine.Scrape();
-
-
-
+            System.Console.WriteLine("Scraping diwine");
+            var diwineLuncherDennaVecka = await diwine.Scrape();
+            System.Console.WriteLine(diwineLuncherDennaVecka);
         }
     }
 

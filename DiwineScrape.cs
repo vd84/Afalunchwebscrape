@@ -15,7 +15,7 @@ namespace Diwine.Scrapers {
 
         }
 
-        public async void Scrape() {
+        public async Task<Dictionary<int, List<MatRätt>>> Scrape() {
                         // Load default configuration
             var config = Configuration.Default.WithDefaultLoader ();
             // Create a new browsing context
@@ -67,6 +67,8 @@ namespace Diwine.Scrapers {
                 Pris = 100
             };
             System.Console.WriteLine(t1.CalcaulateDiscountedPricePercent(20));
+
+            return veckodagar;
 
         }
 
