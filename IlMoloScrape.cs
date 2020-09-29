@@ -33,13 +33,10 @@ namespace IlMolo.Scrapers {
                         var name = rätt.QuerySelector("h4").TextContent;
                         var ingredienser = rätt.QuerySelector("p").TextContent;
                         int pris;
-                        if(name.Substring(0,6) == "DAGENS")
-                        {
-                            pris = 130;
-                        }else
-                        {
-                            pris = int.Parse(ingredienser.Substring(ingredienser.Length-4, 4));
-                        }
+
+                        if(name.Substring(0,6) == "DAGENS") pris = 130; 
+                        else pris = int.Parse(ingredienser.Substring(ingredienser.Length-4, 4));
+
                         Console.WriteLine(pris);
                     }
                  }
