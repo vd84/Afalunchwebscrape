@@ -33,15 +33,16 @@ namespace IlMolo.Scrapers {
                 foreach (var rätt in day.QuerySelectorAll(".dagens"))
                 {
                     var title = rätt.QuerySelector("h4").TextContent;
-                    var ingredienser = rätt.QuerySelector("p").TextContent;
+                    var ingredients = rätt.QuerySelector("p").TextContent;
                     int price;
 
                     if(title.Substring(0,6) == "DAGENS") price = 130; 
-                    else price = int.Parse(ingredienser.Substring(ingredienser.Length-4, 4));
+                    else price = int.Parse(ingredients.Substring(ingredients.Length-4, 4));
                     maträtterPerDag.Add (
                         new MatRätt () {
                             Id = index,
                             Title = title,
+                            Ingredients = ingredients,
                             Price = price
                         }
                     );
@@ -54,7 +55,7 @@ namespace IlMolo.Scrapers {
             foreach (var x in veckodagar) {
                 System.Console.WriteLine ("######################### DAG " + x.Key + " ##########################");
                 foreach (var maträtt in x.Value) {
-                    Console.WriteLine("Name: " + maträtt.Title + "\nPrice: " + maträtt.Price);
+                    System.Console.WriteLine("Name: " + maträtt.Title + "\nPrice: " + maträtt.Price + "\nIngredients: " + maträtt.Ingredients);
                 }
             }
 
