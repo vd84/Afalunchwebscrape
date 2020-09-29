@@ -24,6 +24,7 @@ namespace IlMolo.Scrapers {
             //test
             var lunchItems = document.All
                 .Where (m => m.LocalName == "div" && m.ClassName == "dagensdag");
+            //Create dictionary to store the menu
             Dictionary<int, List<MatRätt>> veckodagar = new Dictionary<int, List<MatRätt>> ();
             var index = 0;
 
@@ -33,30 +34,30 @@ namespace IlMolo.Scrapers {
                 foreach (var rätt in day.QuerySelectorAll(".dagens"))
                 {
                     var title = rätt.QuerySelector("h4").TextContent;
-                    var ingredienser = rätt.QuerySelector("p").TextContent;
+                    var ingredients = rätt.QuerySelector("p").TextContent;
                     int price;
 
                     if(title.Substring(0,6) == "DAGENS") price = 130; 
-                    else price = int.Parse(ingredienser.Substring(ingredienser.Length-4, 4));
+                    else price = int.Parse(ingredients.Substring(ingredients.Length-4, 4));
                     maträtterPerDag.Add (
                         new MatRätt () {
                             Id = index,
-                            Name = title,
-                            Pris = price
+                            Title = title,
+                            Ingredients = ingredients,
+                            Price = price
                         }
                     );
                 }
             veckodagar.Add (index, maträtterPerDag);
             index++;
             }
-    
+
+            //ToString
             foreach (var x in veckodagar) {
                 System.Console.WriteLine ("######################### DAG " + x.Key + " ##########################");
-
                 foreach (var maträtt in x.Value) {
-                    Console.WriteLine("Name: " + maträtt.Name + "\nPrice: " + maträtt.Pris);
+                    System.Console.WriteLine("Name: " + maträtt.Title + "\nPrice: " + maträtt.Price + "\nIngredients: " + maträtt.Ingredients);
                 }
-
             }
 
             return veckodagar;
