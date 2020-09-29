@@ -58,6 +58,16 @@ namespace Diwine.Scrapers {
                 }
 
             }
+
+            System.Console.WriteLine("Testa multiplier");
+            MatRätt t1 = new MatRätt
+            {
+                Id = 1,
+                Name = "test",
+                Pris = 100
+            };
+            System.Console.WriteLine(t1.CalcaulateDiscountedPricePercent(20));
+
         }
 
     }
