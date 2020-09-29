@@ -12,7 +12,7 @@ namespace Afalunchwebscrape {
             IlMoloScrape ilmolo = new IlMoloScrape();
             System.Console.WriteLine("Scraping ilmolo");
             await ilmolo.Scrape();
-
+            
         }
     }
 
