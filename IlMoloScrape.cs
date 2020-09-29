@@ -23,6 +23,7 @@ namespace IlMolo.Scrapers {
             // Log the data to the console
             var lunchItems = document.All
                 .Where (m => m.LocalName == "div" && m.ClassName == "dagensdag");
+            //Create dictionary to store the menu
             Dictionary<int, List<MatRätt>> veckodagar = new Dictionary<int, List<MatRätt>> ();
             var index = 0;
 
@@ -40,22 +41,21 @@ namespace IlMolo.Scrapers {
                     maträtterPerDag.Add (
                         new MatRätt () {
                             Id = index,
-                            Name = title,
-                            Pris = price
+                            Title = title,
+                            Price = price
                         }
                     );
                 }
             veckodagar.Add (index, maträtterPerDag);
             index++;
             }
-    
+
+            //ToString
             foreach (var x in veckodagar) {
                 System.Console.WriteLine ("######################### DAG " + x.Key + " ##########################");
-
                 foreach (var maträtt in x.Value) {
-                    Console.WriteLine("Name: " + maträtt.Name + "\nPrice: " + maträtt.Pris);
+                    Console.WriteLine("Name: " + maträtt.Title + "\nPrice: " + maträtt.Price);
                 }
-
             }
 
             return veckodagar;
