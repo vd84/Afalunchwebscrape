@@ -21,6 +21,7 @@ namespace IlMolo.Scrapers {
             // This is where the HTTP request happens, returns <IDocument> that // we can query later
             var document = await context.OpenAsync ("https://ilmolo.se/lunch/");
             // Log the data to the console
+            //test
             var lunchItems = document.All
                 .Where (m => m.LocalName == "div" && m.ClassName == "menywrapper shadow animated fadeInUp");
 
