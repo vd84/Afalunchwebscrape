@@ -48,7 +48,9 @@ namespace Diwine.Scrapers {
                             Id = index,
                                 Title = title,
                                 Ingredients = ingredients,
-                                Price = price
+                                Price = price,
+                                NameOfRestaurant = "diwine"
+                                
                         }
                     );
 
