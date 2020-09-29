@@ -1,11 +1,8 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using AngleSharp;
-using AngleSharp.Html.Parser;
 using maträtter;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 
 namespace Diwine.Scrapers {
@@ -15,7 +12,7 @@ namespace Diwine.Scrapers {
 
         }
 
-        public async void Scrape() {
+        public async Task<Dictionary<int, List<MatRätt>>> Scrape() {
                         // Load default configuration
             var config = Configuration.Default.WithDefaultLoader ();
             // Create a new browsing context
@@ -58,6 +55,18 @@ namespace Diwine.Scrapers {
                 }
 
             }
+
+            System.Console.WriteLine("Testa multiplier");
+            MatRätt t1 = new MatRätt
+            {
+                Id = 1,
+                Name = "test",
+                Pris = 100
+            };
+            System.Console.WriteLine(t1.CalcaulateDiscountedPricePercent(20));
+
+            return veckodagar;
+
         }
 
     }

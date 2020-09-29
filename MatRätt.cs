@@ -4,8 +4,8 @@ namespace maträtter {
         public string Name { get; set; }
         public int Pris { get; set; }
 
-        public decimal CalcaulateDiscountedPrice(){
-            
+        public decimal CalcaulateDiscountedPricePercent(int percent){
+            return (this.Pris * (100 - percent))/100;
         }
 
     }
