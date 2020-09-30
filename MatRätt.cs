@@ -5,10 +5,8 @@ namespace maträtter {
         public string NameOfRestaurant { get; set; }
         public string Ingredients { get; set; }
         public int Price { get; set; }
-
         public decimal CalcaulateDiscountedPricePercent(int percent){
             return (this.Price * (100 - percent))/100;
         }
-
     }
 }
