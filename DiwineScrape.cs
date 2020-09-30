@@ -79,8 +79,6 @@ namespace Diwine.Scrapers {
             System.Console.WriteLine(t1.CalcaulateDiscountedPricePercent(20));
 
             return veckodagar;
-
         }
-
     }
 }
