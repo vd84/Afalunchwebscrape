@@ -49,7 +49,7 @@ namespace Diwine.Scrapers {
                                 Title = title,
                                 Ingredients = ingredients,
                                 Price = price,
-                                NameOfRestaurant = "diwine"
+                                IdOfRestaurant = 1
                                 
                         }
                     );
@@ -79,8 +79,6 @@ namespace Diwine.Scrapers {
             System.Console.WriteLine(t1.CalcaulateDiscountedPricePercent(20));
 
             return veckodagar;
-
         }
-
     }
 }

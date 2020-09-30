@@ -43,7 +43,8 @@ namespace IlMolo.Scrapers {
                             Id = index,
                             Title = title,
                             Ingredients = ingredients,
-                            Price = price
+                            Price = price,
+                            IdOfRestaurant = 2
                         }
                     );
                 }
