@@ -49,7 +49,7 @@ namespace Diwine.Scrapers {
                                 Title = title,
                                 Ingredients = ingredients,
                                 Price = price,
-                                NameOfRestaurant = "diwine"
+                                IdOfRestaurant = 1
                                 
                         }
                     );
