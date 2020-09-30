@@ -1,25 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Diwine.Scrapers;
 using IlMolo.Scrapers;
-using RabbitMQ.Client;
-using System.Threading;
 using Newtonsoft;
+using RabbitMQ.Client;
 
 namespace Afalunchwebscrape {
     class Program {
         static async Task Main (string[] args) {
             //Diwine
-             DiwineScrape diwine = new DiwineScrape ();
+            DiwineScrape diwine = new DiwineScrape ();
             System.Console.WriteLine ("Scraping diwine");
             var diwineLuncherDennaVecka = await diwine.Scrape ();
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder ();
+            List<string> listJsonWeekDays = new List<string> ();
 
-            var listOfMealsDiwineMonday = diwineLuncherDennaVecka[0];
 
-            string jsonMonday = Newtonsoft.Json.JsonConvert.SerializeObject(listOfMealsDiwineMonday, Newtonsoft.Json.Formatting.Indented);
+            string jsonAllDays = Newtonsoft.Json.JsonConvert.SerializeObject (diwineLuncherDennaVecka, Newtonsoft.Json.Formatting.Indented);
 
+            System.Console.WriteLine (jsonAllDays);
 
             /* IlMoloScrape ilmolo = new IlMoloS
             crape ();
@@ -29,21 +31,20 @@ namespace Afalunchwebscrape {
             var factory = new ConnectionFactory () { HostName = "localhost" };
             using (var connection = factory.CreateConnection ()) {
                 using (var channel = connection.CreateModel ()) {
-                    channel.QueueDeclare (queue: "hello",
+                    channel.QueueDeclare (queue: "insertveckansluncher",
                         durable : false,
                         exclusive : false,
                         autoDelete : false,
                         arguments : null);
-                
 
-                    var body = Encoding.UTF8.GetBytes (jsonMonday);
+                    var body = Encoding.UTF8.GetBytes (jsonAllDays);
 
-                        channel.BasicPublish(exchange: "",
-                            routingKey: "hello",
-                            basicProperties: null,
-                            body: body);
-                        Console.WriteLine(" [x] Sent {0}", jsonMonday);
-                    
+                    channel.BasicPublish (exchange: "",
+                        routingKey: "insertveckansluncher",
+                        basicProperties : null,
+                        body : body);
+                    Console.WriteLine (" [x] Sent {0}", jsonAllDays);
+
                 }
 
                 Console.WriteLine (" Press [enter] to exit.");
@@ -53,4 +54,3 @@ namespace Afalunchwebscrape {
     }
 
 }
-
