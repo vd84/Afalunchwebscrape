@@ -1,11 +1,8 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using AngleSharp;
-using AngleSharp.Html.Parser;
 using maträtter;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
 
 namespace Diwine.Scrapers {
@@ -15,7 +12,7 @@ namespace Diwine.Scrapers {
 
         }
 
-        public async void Scrape() {
+        public async Task<Dictionary<int, List<MatRätt>>> Scrape() {
                         // Load default configuration
             var config = Configuration.Default.WithDefaultLoader ();
             // Create a new browsing context
@@ -33,13 +30,27 @@ namespace Diwine.Scrapers {
                 List<MatRätt> maträtterPerDag = new List<MatRätt> ();
                 foreach (var rätt in item.QuerySelectorAll (".lunch-menu-item")) {
 
-                    var title = rätt.QuerySelector (".td_title").TextContent.Replace (System.Environment.NewLine, " ").Trim ();
+                    var titleandingredients = rätt.QuerySelector (".td_title").TextContent.Replace (System.Environment.NewLine, ":").Trim ();
+                    var splitname =  titleandingredients.Split(":");
+                    var title = splitname[1].Trim ();
+                    string ingredients;
+
+                    try{
+                        ingredients = splitname[2];
+                    }catch(System.IndexOutOfRangeException e){
+                        ingredients = "No ingredients found!";
+                    }finally{
+                        
+                    }
                     var price = int.Parse (rätt.QuerySelector (".td_price").TextContent.Replace (System.Environment.NewLine, " ").Trim ().Split (" ") [0]);
                     maträtterPerDag.Add (
                         new MatRätt () {
                             Id = index,
-                                Name = title,
-                                Pris = price
+                                Title = title,
+                                Ingredients = ingredients,
+                                Price = price,
+                                NameOfRestaurant = "diwine"
+                                
                         }
                     );
 
@@ -50,14 +61,25 @@ namespace Diwine.Scrapers {
             }
 
             foreach (var x in veckodagar) {
-                System.Console.WriteLine (x.Key);
+                System.Console.WriteLine ("######################### DAG " + x.Key + " ##########################");
 
                 foreach (var maträtt in x.Value) {
-                    System.Console.WriteLine (maträtt.Name);
-                    System.Console.WriteLine (maträtt.Pris);
+                    System.Console.WriteLine("Name: " + maträtt.Title + "\nPrice: " + maträtt.Price + "\nIngredients: " + maträtt.Ingredients);
                 }
 
             }
+
+            System.Console.WriteLine("Testa multiplier");
+            MatRätt t1 = new MatRätt
+            {
+                Id = 1,
+                Title = "test",
+                Price = 100
+            };
+            System.Console.WriteLine(t1.CalcaulateDiscountedPricePercent(20));
+
+            return veckodagar;
+
         }
 
     }

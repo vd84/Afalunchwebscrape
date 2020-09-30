@@ -1,61 +1,56 @@
 ﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using AngleSharp;
-using AngleSharp.Html.Parser;
-using maträtter;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using Diwine.Scrapers;
+using IlMolo.Scrapers;
+using Newtonsoft;
+using RabbitMQ.Client;
 
 namespace Afalunchwebscrape {
     class Program {
         static async Task Main (string[] args) {
-            // Load default configuration
-            var config = Configuration.Default.WithDefaultLoader ();
-            // Create a new browsing context
-            var context = BrowsingContext.New (config);
-            // This is where the HTTP request happens, returns <IDocument> that // we can query later
-            var document = await context.OpenAsync ("https://diwinestockholm.se/lunch/");
-            // Log the data to the console
-            var lunchItems = document.All
-                .Where (m => m.LocalName == "tbody" && m.ClassName == "lunch-day-content");
+            //Diwine
+            DiwineScrape diwine = new DiwineScrape ();
+            System.Console.WriteLine ("Scraping diwine");
+            var diwineLuncherDennaVecka = await diwine.Scrape ();
+            StringBuilder sb = new StringBuilder ();
+            List<string> listJsonWeekDays = new List<string> ();
 
-            Dictionary<int, List<MatRätt>> veckodagar = new Dictionary<int, List<MatRätt>> ();
-            var index = 0;
 
-            foreach (var item in lunchItems) {
-                List<MatRätt> maträtterPerDag = new List<MatRätt> ();
-                foreach (var rätt in item.QuerySelectorAll (".lunch-menu-item")) {
+            string jsonAllDays = Newtonsoft.Json.JsonConvert.SerializeObject (diwineLuncherDennaVecka, Newtonsoft.Json.Formatting.Indented);
 
-                    var title = rätt.QuerySelector (".td_title").TextContent.Replace (System.Environment.NewLine, " ").Trim ();
-                    var price = int.Parse (rätt.QuerySelector (".td_price").TextContent.Replace (System.Environment.NewLine, " ").Trim ().Split (" ") [0]);
+            System.Console.WriteLine (jsonAllDays);
 
-                    maträtterPerDag.Add (
-                        new MatRätt () {
-                            Id = index,
-                                Name = title,
-                                Pris = price
-                        }
-                    );
+            /* IlMoloScrape ilmolo = new IlMoloS
+            crape ();
+            System.Console.WriteLine ("Scraping ilmolo");
+            await ilmolo.Scrape (); */
+
+            var factory = new ConnectionFactory () { HostName = "localhost" };
+            using (var connection = factory.CreateConnection ()) {
+                using (var channel = connection.CreateModel ()) {
+                    channel.QueueDeclare (queue: "insertveckansluncher",
+                        durable : false,
+                        exclusive : false,
+                        autoDelete : false,
+                        arguments : null);
+
+                    var body = Encoding.UTF8.GetBytes (jsonAllDays);
+
+                    channel.BasicPublish (exchange: "",
+                        routingKey: "insertveckansluncher",
+                        basicProperties : null,
+                        body : body);
+                    Console.WriteLine (" [x] Sent {0}", jsonAllDays);
 
                 }
-                veckodagar.Add (index, maträtterPerDag);
-                index++;
 
+                Console.WriteLine (" Press [enter] to exit.");
+                Console.ReadLine ();
             }
-
-            foreach (var x in veckodagar) {
-                System.Console.WriteLine (x.Key);
-
-                foreach (var maträtt in x.Value) {
-                    System.Console.WriteLine (maträtt.Name);
-                    System.Console.WriteLine (maträtt.Pris);
-                }
-
-            }
-
         }
     }
-
 
 }
