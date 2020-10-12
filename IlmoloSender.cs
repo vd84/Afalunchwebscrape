@@ -24,7 +24,7 @@ namespace Sender.Ilmolo {
 
             System.Console.WriteLine (jsonAllDays);
 
-            var factory = new ConnectionFactory () { HostName = "localhost" };
+            var factory = new ConnectionFactory () {  HostName = "http://localhost:5762", UserName = "guest", Password = "guest" };
             using (var connection = factory.CreateConnection ()) {
                 using (var channel = connection.CreateModel ()) {
                     channel.QueueDeclare (queue: "insertilmolomenu",
