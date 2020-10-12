@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using Diwine.Scrapers;
 using IlMolo.Scrapers;
-using Newtonsoft;
 using RabbitMQ.Client;
 
 namespace Sender.Ilmolo {
@@ -18,7 +15,6 @@ namespace Sender.Ilmolo {
             
             StringBuilder sb = new StringBuilder ();
             List<string> listJsonWeekDays = new List<string> ();
-
 
             string jsonAllDays = Newtonsoft.Json.JsonConvert.SerializeObject (IlMoloLuncherDennaVecka, Newtonsoft.Json.Formatting.Indented);
 
@@ -40,13 +36,10 @@ namespace Sender.Ilmolo {
                         basicProperties : null,
                         body : body);
                     Console.WriteLine (" [x] Sent {0}", jsonAllDays);
-
                 }
-
                 Console.WriteLine (" Press [enter] to exit.");
                 Console.ReadLine ();
             }
         }
     }
-
 }
