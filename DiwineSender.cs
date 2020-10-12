@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using Diwine.Scrapers;
-using IlMolo.Scrapers;
-using Newtonsoft;
 using RabbitMQ.Client;
 
 namespace Sender.Diwine {
@@ -52,5 +49,4 @@ namespace Sender.Diwine {
             }
         }
     }
-
 }

@@ -3,8 +3,6 @@ using System.Threading.Tasks;
 using AngleSharp;
 using maträtter;
 using System.Collections.Generic;
-using System;
-
 
 namespace IlMolo.Scrapers {
     public class IlMoloScrape {
@@ -59,9 +57,7 @@ namespace IlMolo.Scrapers {
                     System.Console.WriteLine("Name: " + maträtt.Title + "\nPrice: " + maträtt.Price + "\nIngredients: " + maträtt.Ingredients);
                 }
             }
-
             return veckodagar;
         }
-
     }
 }
