@@ -18,7 +18,7 @@ namespace Sender.Diwine {
             string jsonAllDays = Newtonsoft.Json.JsonConvert.SerializeObject (diwineLuncherDennaVecka, Newtonsoft.Json.Formatting.Indented);
             System.Console.WriteLine (jsonAllDays);
 
-            var factory = new ConnectionFactory () { HostName = "http://localhost:5672", UserName = "guest", Password = "guest" };
+            var factory = new ConnectionFactory () { HostName = "172.21.40.149", Port=5672, UserName="guest", Password="guest" };
             using (var connection = factory.CreateConnection ()) {
                 using (var channel = connection.CreateModel ()) {
                     channel.QueueDeclare (queue: "insertdiwinemenu",
