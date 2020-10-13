@@ -9,7 +9,6 @@ namespace Diwine.Scrapers {
     public class DiwineScrape {
 
         public DiwineScrape () {
-
         }
 
         public async Task<Dictionary<int, List<MatRätt>>> Scrape() {
@@ -57,7 +56,6 @@ namespace Diwine.Scrapers {
                 }
                 veckodagar.Add (index, maträtterPerDag);
                 index++;
-
             }
 
             foreach (var x in veckodagar) {
@@ -66,7 +64,6 @@ namespace Diwine.Scrapers {
                 foreach (var maträtt in x.Value) {
                     System.Console.WriteLine("Name: " + maträtt.Title + "\nPrice: " + maträtt.Price + "\nIngredients: " + maträtt.Ingredients);
                 }
-
             }
 
             System.Console.WriteLine("Testa multiplier");
@@ -76,8 +73,8 @@ namespace Diwine.Scrapers {
                 Title = "test",
                 Price = 100
             };
-            System.Console.WriteLine(t1.CalcaulateDiscountedPricePercent(20));
 
+            System.Console.WriteLine(t1.CalcaulateDiscountedPricePercent(20));
             return veckodagar;
         }
     }
